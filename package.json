@@ -1,0 +1,10 @@
+{
+  "name": "cncf-thane-demo-agent",
+  "version": "1.0.0",
+  "description": "For CNCF Thane demo",
+  "main": "src/index.js",
+  "dependencies": {
+    "fs-extra": "^10.1.0",
+    "axios": "^1.6.0"
+  }
+}
