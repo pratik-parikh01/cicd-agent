@@ -1,5 +1,5 @@
 const { copyFiles, gitUpdate } = require('./git');
-
+const { MINUTE } = require('../utils/process');
 
 async function updater(config) {
 
@@ -29,6 +29,19 @@ config = {
     user: process.env.GIT_USER || "crap",
     clonepath: process.env.CLONE_SRC_PATH || "/tmp/here",
     destpath: process.env.CLONE_DEST_PATH || "/tmp/there"
+  },
+  update: {
+    frequency: process.env.UPDATE_FREQUENCY || "1" // every "x" mins
   }
 }
 updater(config)
+
+setInterval(async () => {
+  try {
+      console.log('periodic updation starting');
+      await updater(config)
+  } catch (e) {
+    console.log('error in periodic updation : ', e);
+      process.exit(1);
+  }
+}, MINUTE * config.update.frequency);
